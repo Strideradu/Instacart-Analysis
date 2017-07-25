@@ -5,8 +5,8 @@ import pickle
 
 from sklearn.model_selection import train_test_split
 
-data_dir = "/mnt/home/dunan/Learn/Kaggle/intracart/data/"
-feature_dir = "/mnt/home/dunan/Learn/Kaggle/intracart/features/"
+data_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/data/"
+feature_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/features/"
 
 ########################################################################
 ### Load data

@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import os
 
-data_dir = "/mnt/home/dunan/Learn/Kaggle/intracart/data/"
-feature_dir = "/mnt/home/dunan/Learn/Kaggle/intracart/features/"
+data_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/data/"
+feature_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/features/"
 
 ########################################################################
 ### Load data

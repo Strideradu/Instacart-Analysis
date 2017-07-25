@@ -37,7 +37,7 @@ features = [('product_features.csv','product_id'),
             ('order_features.csv','order_id')]
 
 customers = pickle.load(open( os.path.join(feature_dir,"customers.p"), "rb" ) )
-train_customers = customers['train_customers']
+train_customers = customers['train_customers'][:n_train_customers]
 valid_customers = customers['valid_customers']
 test_customers  = customers['test_customers']
 
@@ -124,6 +124,6 @@ sub = pd.DataFrame.from_dict(d, orient='index')
 
 sub.reset_index(inplace=True)
 sub.columns = ['order_id', 'products']
-sub.to_csv('/mnt/home/dunan/Learn/Kaggle/instacart/submission_full_data.csv', index=False)
+sub.to_csv('/mnt/home/dunan/Learn/Kaggle/instacart/submission_10000_add_some_features_data.csv', index=False)
 
 clf.plot_importance()
