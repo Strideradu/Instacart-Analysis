@@ -48,6 +48,9 @@ userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].me
 userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std()
 userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1]) #?
 
+userXproduct['product_average_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].mean().astype(np.float32)
+userXproduct['product_std_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].std().astype(np.float32)
+
 #Compute features dependent on user data
 userXproduct['UP_order_numbers'] = user_product_group['order_number'].apply(np.array)
 
