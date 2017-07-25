@@ -45,6 +45,7 @@ userXproduct['user_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.
 userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[1]))
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean()
+userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std()
 userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1]) #?
 
 #Compute features dependent on user data
