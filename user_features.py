@@ -26,6 +26,13 @@ orders = pd.read_csv(os.path.join(data_dir, 'orders.csv'), dtype={
     'order_hour_of_day': np.int8,
     'days_since_prior_order': np.float32})
 
+print('loading products')
+products = pd.read_csv(os.path.join(data_dir, 'products.csv'), dtype={
+    'product_id': np.uint16,
+    'order_id': np.int32,
+    'aisle_id': np.uint8,
+    'department_id': np.uint8})
+
 ########################################################################
 ### Compute features
 ########################################################################
@@ -38,12 +45,23 @@ priors = priors.merge(orders, on="order_id", how="left")
 usr = pd.DataFrame()
 usr['user_average_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].mean().astype(np.float32)
 usr['user_std_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].std().astype(np.float32)
+usr['user_sum_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].sum().astype(np.float32)
 usr['user_nb_orders'] = orders.groupby('user_id').size().astype(np.float32)
+usr['user_average_dows'] = orders.groupby('user_id')['order_dow'].mean().astype(np.float32)
+usr['user_std_dow'] = orders.groupby('user_id')['order_dow'].std().astype(np.float32)
+usr['user_average_hour_of_day'] = orders.groupby('user_id')['order_hour_of_day'].mean().astype(np.float32)
+usr['user_std_days_hour_of_day'] = orders.groupby('user_id')['order_hour_of_day'].std().astype(np.float32)
 
 users = pd.DataFrame()
 users['user_total_items'] = priors.groupby('user_id').size().astype(np.float32)
 users['all_products'] = priors.groupby('user_id')['product_id'].apply(set)
 users['user_total_distinct_items'] = (users.all_products.map(len)).astype(np.float32)
+
+priors = priors.merge(products, on="product_id", how="left")
+users['all_aisles'] == priors.groupby('user_id')['aisle_id'].apply(set)
+users['user_nb_aisles'] = (users.all_aisles.map(len)).astype(np.float32)
+users['all_department'] == priors.groupby('user_id')['department_id'].apply(set)
+users['user_nb_department'] = (users.all_department.map(len)).astype(np.float32)
 
 users = users.join(usr)
 del usr
@@ -55,8 +73,15 @@ users = users[['user_id',
                'user_nb_orders',
                'user_average_days_between_orders',
                'user_std_days_between_orders',
+               'user_sum_days_between_orders',
+               'user_average_dows',
+               'user_std_dow',
+               'user_average_hour_of_day',
+               'user_std_days_hour_of_day',
                'user_total_items',
                'user_total_distinct_items',
+               'user_nb_aisles',
+               'user_nb_department'
                'user_average_basket']]
 
 print('writing features to csv')
