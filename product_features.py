@@ -64,7 +64,7 @@ prods['product_std_days_between_orders'] = priors.groupby('product_id')['days_si
     np.float32)
 prods['aisle_average_days_between_orders'] = priors.groupby('aisle_id')['days_since_prior_order'].mean().astype(
     np.float32)
-prods['aisle_std_days_between_orders'] = priors.groupby('aislet_id')['days_since_prior_order'].std().astype(np.float32)
+prods['aisle_std_days_between_orders'] = priors.groupby('aisle_id')['days_since_prior_order'].std().astype(np.float32)
 prods['department_average_days_between_orders'] = priors.groupby('department_id')[
     'days_since_prior_order'].mean().astype(np.float32)
 prods['department_std_days_between_orders'] = priors.groupby('department_id')['days_since_prior_order'].std().astype(
