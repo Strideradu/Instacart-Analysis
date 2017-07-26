@@ -81,7 +81,7 @@ users = users[['user_id',
                'user_total_items',
                'user_total_distinct_items',
                'user_nb_aisles',
-               'user_nb_department'
+               'user_nb_department',
                'user_average_basket']]
 
 print('writing features to csv')
