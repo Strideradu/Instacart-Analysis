@@ -58,9 +58,9 @@ users['all_products'] = priors.groupby('user_id')['product_id'].apply(set)
 users['user_total_distinct_items'] = (users.all_products.map(len)).astype(np.float32)
 
 priors = priors.merge(products, on="product_id", how="left")
-users['all_aisles'] == priors.groupby('user_id')['aisle_id'].apply(set)
+users['all_aisles'] = priors.groupby('user_id')['aisle_id'].apply(set)
 users['user_nb_aisles'] = (users.all_aisles.map(len)).astype(np.float32)
-users['all_department'] == priors.groupby('user_id')['department_id'].apply(set)
+users['all_department'] = priors.groupby('user_id')['department_id'].apply(set)
 users['user_nb_department'] = (users.all_department.map(len)).astype(np.float32)
 
 users = users.join(usr)
