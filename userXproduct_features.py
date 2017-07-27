@@ -74,16 +74,20 @@ userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_o
 
 # aisle and department features
 priors = priors.merge(products,on="product_id",how="left")
+priors['user_aisle_id'] = priors['user_id'].map(str) + "_" + priors['aisle_id'].map(str)
+user_aisle_group = priors.groupby('user_aisle_id')
 
-user_aisle_group = priors.groupby(['user_id', 'aisle_id'])
+UA = pd.DataFrame()
+UA['UA_reorders'] = user_aisle_group['reordered'].sum()
+UA['UA_mean_add_to_cart'] = user_aisle_group['add_to_cart_order'].mean()
+UA['UA_std_add_to_cart'] = user_aisle_group['add_to_cart_order'].std()
+UA['UA_last_add_to_cart'] = user_aisle_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])
+UAt['UA_all_orders'] = user_aisle_group['order_id'].apply(set)
+UA['UA_nb_orders'] = (userXproduct.UA_all_orders.map(len)).astype(np.float32)
+UA['UA_order_numbers'] = user_aisle_group['order_number'].apply(np.array)
 
-userXproduct['UA_reorders'] = user_aisle_group['reordered'].sum()
-userXproduct['UA_mean_add_to_cart'] = user_aisle_group['add_to_cart_order'].mean()
-userXproduct['UA_std_add_to_cart'] = user_aisle_group['add_to_cart_order'].std()
-userXproduct['UA_last_add_to_cart'] = user_aisle_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])
-userXproduct['UA_all_orders'] = user_aisle_group['order_id'].apply(set)
-userXproduct['UA_nb_orders'] = (userXproduct.UA_all_orders.map(len)).astype(np.float32)
-userXproduct['UA_order_numbers'] = user_aisle_group['order_number'].apply(np.array)
+userXproduct = userXproduct.merge(products[['product_id', 'aisle_id', 'department_id']], on="product_id", how="left")
+userXproduct = userXproduct.merge(UA, on=["user_id","aisle_id"],how="left")
 
 user_department_group = priors.groupby(['user_id', 'department_id'])
 
