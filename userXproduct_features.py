@@ -26,6 +26,13 @@ orders = pd.read_csv(os.path.join(data_dir,'orders.csv'), dtype={
         'order_hour_of_day': np.int8,
         'days_since_prior_order': np.float32})
 
+print('loading products')
+products = pd.read_csv(os.path.join(data_dir, 'products.csv'), dtype={
+    'product_id': np.uint16,
+    'order_id': np.int32,
+    'aisle_id': np.uint8,
+    'department_id': np.uint8})
+
 ########################################################################
 ### Compute features
 ########################################################################
@@ -43,6 +50,7 @@ userXproduct.columns = ['UP_orders']
 userXproduct['user_product_id'] = userXproduct.index
 userXproduct['user_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[0]))
 userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[1]))
+userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean()
 userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std()
@@ -64,7 +72,32 @@ userXproduct['UP_order_rate_since_first_order'] = userXproduct.apply(lambda x: x
 # Other
 userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(lambda x: np.sum(x>1)/x.size)
 
-userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers','user_id','product_id'],axis=1)
+# aisle and department features
+priors = priors.merge(products,on="product_id",how="left")
+
+user_aisle_group = priors.groupby(['user_id', 'aisle_id'])
+
+userXproduct['UA_reorders'] = user_aisle_group['reordered'].sum()
+userXproduct['UA_mean_add_to_cart'] = user_aisle_group['add_to_cart_order'].mean()
+userXproduct['UA_std_add_to_cart'] = user_aisle_group['add_to_cart_order'].std()
+userXproduct['UA_last_add_to_cart'] = user_aisle_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])
+userXproduct['UA_all_orders'] = user_aisle_group['order_id'].apply(set)
+userXproduct['UA_nb_orders'] = (userXproduct.UA_all_orders.map(len)).astype(np.float32)
+userXproduct['UA_order_numbers'] = user_aisle_group['order_number'].apply(np.array)
+
+user_department_group = priors.groupby(['user_id', 'department_id'])
+
+userXproduct['UD_reorders'] = user_department_group['reordered'].sum()
+userXproduct['UD_mean_add_to_cart'] = user_department_group['add_to_cart_order'].mean()
+userXproduct['UD_std_add_to_cart'] = user_department_group['add_to_cart_order'].std()
+userXproduct['UD_last_add_to_cart'] = user_department_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])
+userXproduct['UD_all_orders'] = user_department_group['order_id'].apply(set)
+userXproduct['UD_nb_orders'] = (userXproduct.UD_all_orders.map(len)).astype(np.float32)
+userXproduct['UD_order_numbers'] = user_department_group['order_number'].apply(np.array)
+
+
+# drop duplicate features
+userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers','UA_all_orders','UA_all_orders','user_id','product_id'],axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir,'userXproduct_features.csv'), index=False)
