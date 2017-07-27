@@ -97,7 +97,7 @@ userXproduct['UD_order_numbers'] = user_department_group['order_number'].apply(n
 
 
 # drop duplicate features
-userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers','UA_all_orders','UA_all_orders','user_id','product_id'],axis=1)
+userXproduct = userXproduct.drop(['user_nb_orders','UP_order_numbers','UA_all_orders','UD_all_orders','user_id','product_id'],axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir,'userXproduct_features.csv'), index=False)
