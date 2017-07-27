@@ -126,4 +126,4 @@ sub.reset_index(inplace=True)
 sub.columns = ['order_id', 'products']
 sub.to_csv('/mnt/home/dunan/Learn/Kaggle/instacart/submission_full_add_more_features_data.csv', index=False)
 
-clf.plot_importance()
+clf.print_importance()
