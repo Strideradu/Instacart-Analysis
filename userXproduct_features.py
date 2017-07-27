@@ -100,6 +100,7 @@ userXproduct = userXproduct.merge(UA, on=["user_id", "aisle_id"], how="left")
 priors['user_department_id'] = priors['user_id'].map(str) + "_" + priors['department_id'].map(str)
 user_department_group = priors.groupby('user_department_id')
 
+UD = pd.DataFrame()
 UD['UD_reorders'] = user_department_group['reordered'].sum()
 UD['UD_mean_add_to_cart'] = user_department_group['add_to_cart_order'].mean()
 UD['UD_std_add_to_cart'] = user_department_group['add_to_cart_order'].std()
