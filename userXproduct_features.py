@@ -117,7 +117,7 @@ userXproduct = userXproduct.merge(UD, on=["user_id", "department_id"], how="left
 # drop duplicate features
 userXproduct = userXproduct.drop(
     ['user_nb_orders', 'UP_order_numbers', 'UA_all_orders', 'UD_all_orders', 'user_id', 'product_id', 'aisle_id',
-     'department_id', 'user_aisle_id', 'user_department_id', 'UA_all_orders','UD_all_orders'], axis=1)
+     'department_id', 'user_aisle_id', 'user_department_id', 'UA_order_numbers','UD_order_numbers'], axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features.csv'), index=False)
