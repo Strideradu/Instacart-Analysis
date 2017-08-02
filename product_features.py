@@ -70,6 +70,21 @@ prods['department_average_days_between_orders'] = priors.groupby('department_id'
 prods['department_std_days_between_orders'] = priors.groupby('department_id')['days_since_prior_order'].std().astype(
     np.float32)
 
+prods['product_avearage_dows'] = priors.groupby('product_id')['order_dow'].mean().astype(np.float32)
+prods['product_std_dows'] = priors.groupby('product_id')['order_dow'].std().astype(np.float32)
+prods['aisle_avearage_dows'] = priors.groupby('aisle_id')['order_dow'].mean().astype(np.float32)
+prods['aisle_std_dows'] = priors.groupby('aisle_id')['order_dow'].std().astype(np.float32)
+prods['department_avearage_dows'] = priors.groupby('department_id')['order_dow'].mean().astype(np.float32)
+prods['department_std_dows'] = priors.groupby('department_id')['order_dow'].std().astype(np.float32)
+
+prods['product_avearage_hour_of_day'] = priors.groupby('product_id')['order_hour_of_day'].mean().astype(np.float32)
+prods['product_std_hour_of_day'] = priors.groupby('product_id')['order_hour_of_day'].std().astype(np.float32)
+prods['aisle_avearage_hour_of_day'] = priors.groupby('aisle_id')['order_hour_of_day'].mean().astype(np.float32)
+prods['aisle_std_hour_of_day'] = priors.groupby('aisle_id')['order_hour_of_day'].std().astype(np.float32)
+prods['department_avearage_hour_of_day'] = priors.groupby('department_id')['order_hour_of_day'].mean().astype(
+    np.float32)
+prods['department_std_hour_of_day'] = priors.groupby('department_id')['order_hour_of_day'].std().astype(np.float32)
+
 products = products.join(prods, on='product_id')
 products = products.join(aisle, on='aisle_id')
 products = products.join(department, on='department_id')
@@ -88,7 +103,19 @@ products = products[['product_id',
                      'aisle_average_days_between_orders',
                      'aisle_std_days_between_orders',
                      'department_average_days_between_orders',
-                     'department_std_days_between_orders'
+                     'department_std_days_between_orders',
+                     'product_avearage_dows',
+                     'product_std_dows',
+                     'aisle_avearage_dows',
+                     'aisle_std_dows',
+                     'department_avearage_dows',
+                     'department_std_dows',
+                     'product_avearage_hour_of_day',
+                     'product_std_hour_of_day',
+                     'aisle_avearage_hour_of_day',
+                     'aisle_std_hour_of_day',
+                     'department_avearage_hour_of_day',
+                     'department_std_hour_of_day'
                      ]]
 
 print('writing features to csv')

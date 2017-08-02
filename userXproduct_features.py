@@ -44,17 +44,50 @@ priors = priors.merge(orders, on="order_id", how="left")
 
 priors['user_product_id'] = priors['user_id'].map(str) + "_" + priors['product_id'].map(str)
 
+d = dict()
+for row in priors.itertuples():
+    z = row.user_product_id
+    if z not in d:
+        d[z] = (
+            (row.order_number, row.order_id),
+            row.add_to_cart_order)
+    else:
+        d[z] = (
+            max(d[z][1], (row.order_number, row.order_id)),
+            d[z][2] + row.add_to_cart_order)
+
+print('to dataframe (less memory)')
+d = pd.DataFrame.from_dict(d, orient='index')
+d.columns = ['last_order_id', 'sum_pos_in_cart']
+d.last_order_id = d.last_order_id.map(lambda x: x[1]).astype(np.int32)
+d.sum_pos_in_cart = d.sum_pos_in_cart.astype(np.int16)
+d['user_product_id'] = d.index
+
 user_product_group = priors.groupby('user_product_id')
 userXproduct = user_product_group.size().astype(np.float32).to_frame()
 userXproduct.columns = ['UP_orders']
 userXproduct['user_product_id'] = userXproduct.index
 userXproduct['user_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[0]))
 userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[1]))
+
+userXproduct["UP_last_order_id"] = userXproduct.user_product_id.map(d.last_order_id)
+userXproduct["UP_sum_pos_in_cart"] = userXproduct.user_product_id.map(d.sum_pos_in_cart)
+
+del d
+
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean()
 userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std()
 userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])  # ?
+
+userXproduct['UP_average_dows'] = user_product_group['order_dow'].mean().astype(np.float32)
+userXproduct['UP_std_dows'] = user_product_group['order_dow'].std().astype(np.float32)
+userXproduct['UP_average_hour_of_day'] = user_product_group['order_hour_of_day'].mean().astype(np.float32)
+userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std().astype(np.float32)
+
+userXproduct['UP_average_pos_in_cart'] = (userXproduct["UP_sum_pos_in_cart"] / userXproduct['UP_nb_orders']).astype(
+    np.float32)
 
 # userXproduct['product_average_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].mean().astype(np.float32)
 # userXproduct['product_std_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].std().astype(np.float32)
@@ -70,6 +103,13 @@ userXproduct['UP_orders_since_last_order'] = userXproduct.apply(
     lambda x: np.min(x['user_nb_orders'] - x['UP_order_numbers']), axis=1)
 userXproduct['UP_order_rate_since_first_order'] = userXproduct.apply(
     lambda x: x['UP_orders'] / (x['user_nb_orders'] - np.min(x['UP_order_numbers'])), axis=1)
+userXproduct['UP_delta_hour_vs_last'] = abs(userXproduct.order_hour_of_day - userXproduct.order_hour_of_day).map(
+    lambda x: min(x, 24 - x)).astype(np.int8)
+"""
+userXproduct['UP_days_since_last_order'] = (
+    userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
+    )
+"""
 
 # Other
 userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(
@@ -117,7 +157,7 @@ userXproduct = userXproduct.merge(UD, on=["user_id", "department_id"], how="left
 # drop duplicate features
 userXproduct = userXproduct.drop(
     ['user_nb_orders', 'UP_order_numbers', 'UA_all_orders', 'UD_all_orders', 'user_id', 'product_id', 'aisle_id',
-     'department_id', 'user_aisle_id', 'user_department_id', 'UA_order_numbers','UD_order_numbers'], axis=1)
+     'department_id', 'user_aisle_id', 'user_department_id', 'UA_order_numbers', 'UD_order_numbers'], axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features.csv'), index=False)
