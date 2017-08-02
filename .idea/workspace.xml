@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb03107b-f57b-4b79-a37f-002924106e81" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userXproduct_features.py" afterPath="$PROJECT_DIR$/userXproduct_features.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +21,7 @@
       <file leaf-file-name="order_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/order_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
+            <state relative-caret-position="486">
               <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -32,7 +33,7 @@
       <file leaf-file-name="product_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/product_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2511">
+            <state relative-caret-position="3240">
               <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -56,8 +57,8 @@
       <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="170" column="25" lean-forward="true" selection-start-line="170" selection-start-column="25" selection-end-line="170" selection-end-column="25" />
+            <state relative-caret-position="419">
+              <caret line="121" column="3" lean-forward="false" selection-start-line="121" selection-start-column="3" selection-end-line="121" selection-end-column="3" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -90,7 +91,7 @@
       <file leaf-file-name="user_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="1161">
               <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="119" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -270,7 +271,7 @@
     <frame x="-11" y="-11" width="2182" height="1402" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26058325" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26011288" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -766,7 +767,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/product_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2511">
+        <state relative-caret-position="3240">
           <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -776,7 +777,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/user_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="1161">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="119" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -786,7 +787,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/order_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
+        <state relative-caret-position="486">
           <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -796,8 +797,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="170" column="25" lean-forward="true" selection-start-line="170" selection-start-column="25" selection-end-line="170" selection-end-column="25" />
+        <state relative-caret-position="419">
+          <caret line="121" column="3" lean-forward="false" selection-start-line="121" selection-start-column="3" selection-end-line="121" selection-end-column="3" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
