@@ -75,7 +75,7 @@ userXproduct["UP_sum_pos_in_cart"] = userXproduct.user_product_id.map(d.sum_pos_
 
 del d
 
-
+userXproduct['order_id'] = user_product_group['order_id'].shift(0)
 
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
@@ -111,11 +111,12 @@ user_features = pd.read_csv(os.path.join(feature_dir, 'user_features.csv'))
 userXproduct = userXproduct.merge(user_features[['user_id', 'user_nb_orders']], on="user_id", how="left")
 userXproduct['UP_order_rate'] = userXproduct['UP_orders'] / userXproduct['user_nb_orders']
 
+userXproduct['order_hour_of_day'] = userXproduct.order_id.map(orders.order_hour_of_day)
 userXproduct['UP_orders_since_last_order'] = userXproduct.apply(
     lambda x: np.min(x['user_nb_orders'] - x['UP_order_numbers']), axis=1)
 userXproduct['UP_order_rate_since_first_order'] = userXproduct.apply(
     lambda x: x['UP_orders'] / (x['user_nb_orders'] - np.min(x['UP_order_numbers'])), axis=1)
-userXproduct['UP_delta_hour_vs_last'] = abs(userXproduct.order_hour_of_day - userXproduct.order_hour_of_day).map(
+userXproduct['UP_delta_hour_vs_last'] = abs(userXproduct.order_hour_of_day - userXproduct.UP_last_order_id.map(orders.order_hour_of_day)).map(
     lambda x: min(x, 24 - x)).astype(np.int8)
 
 orders['cum_day'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum())
@@ -171,7 +172,7 @@ userXproduct = userXproduct.merge(UD, on=["user_id", "department_id"], how="left
 userXproduct = userXproduct.drop(
     ['user_nb_orders', 'UP_order_numbers', 'UA_all_orders', 'UD_all_orders', 'user_id', 'product_id', 'aisle_id',
      'department_id', 'user_aisle_id', 'user_department_id', 'UA_order_numbers', 'UD_order_numbers',
-     'user_average_days_between_orders'], axis=1)
+     'user_average_days_between_orders','order_id','UP_last_order_id', 'order_hour_of_day'], axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features.csv'), index=False)
