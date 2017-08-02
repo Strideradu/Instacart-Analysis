@@ -88,6 +88,8 @@ userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std
 
 userXproduct['UP_average_pos_in_cart'] = (userXproduct["UP_sum_pos_in_cart"] / userXproduct['UP_nb_orders']).astype(
     np.float32)
+userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
+userXproduct['days_since_ratio'] = userXproduct.days_since_prior_order / userXproduct.user_average_days_between_orders
 
 # userXproduct['product_average_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].mean().astype(np.float32)
 # userXproduct['product_std_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].std().astype(np.float32)

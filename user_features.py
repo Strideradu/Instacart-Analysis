@@ -52,9 +52,6 @@ usr['user_std_dow'] = orders.groupby('user_id')['order_dow'].std().astype(np.flo
 usr['user_average_hour_of_day'] = orders.groupby('user_id')['order_hour_of_day'].mean().astype(np.float32)
 usr['user_std_hour_of_day'] = orders.groupby('user_id')['order_hour_of_day'].std().astype(np.float32)
 
-usr['days_since_prior_order'] = usr.order_id.map(orders.days_since_prior_order)
-usr['days_since_ratio'] = usr.days_since_prior_order / usr.user_average_days_between_orders
-
 users = pd.DataFrame()
 users['user_total_items'] = priors.groupby('user_id').size().astype(np.float32)
 users['all_products'] = priors.groupby('user_id')['product_id'].apply(set)
@@ -85,9 +82,7 @@ users = users[['user_id',
                'user_total_distinct_items',
                'user_nb_aisles',
                'user_nb_department',
-               'user_average_basket',
-               'days_since_prior_order',
-               'days_since_ratio'
+               'user_average_basket'
                ]]
 
 print('writing features to csv')
