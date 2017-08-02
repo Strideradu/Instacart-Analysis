@@ -179,4 +179,4 @@ userXproduct = userXproduct.drop(
      'days_since_prior_order'], axis=1)
 
 print('writing features to csv')
-userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features.csv'), index=False)
+userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features_test.csv'), index=False)

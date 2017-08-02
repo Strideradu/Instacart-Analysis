@@ -56,8 +56,8 @@
       <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="932">
-              <caret line="177" column="85" lean-forward="false" selection-start-line="177" selection-start-column="85" selection-end-line="177" selection-end-column="85" />
+            <state relative-caret-position="689">
+              <caret line="112" column="105" lean-forward="true" selection-start-line="112" selection-start-column="105" selection-end-line="112" selection-end-column="105" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -808,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="932">
-          <caret line="177" column="85" lean-forward="false" selection-start-line="177" selection-start-column="85" selection-end-line="177" selection-end-column="85" />
+        <state relative-caret-position="689">
+          <caret line="112" column="105" lean-forward="true" selection-start-line="112" selection-start-column="105" selection-end-line="112" selection-end-column="105" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
