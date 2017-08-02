@@ -123,7 +123,7 @@ userXproduct['UP_delta_hour_vs_last'] = abs(
     userXproduct.order_hour_of_day - userXproduct.UP_last_order_id.map(orders.order_hour_of_day)).map(
     lambda x: min(x, 24 - x)).astype(np.int8)
 
-orders['cum_day'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum())
+orders['cum_days'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum())
 userXproduct['UP_days_since_last_order'] = (
     userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
 )
