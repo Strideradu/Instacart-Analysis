@@ -75,7 +75,7 @@ userXproduct["UP_sum_pos_in_cart"] = userXproduct.user_product_id.map(d.sum_pos_
 
 del d
 
-userXproduct.merge(
+userXproduct = userXproduct.merge(
     orders[orders['eval_set'] != 'prior'][
         ['order_id', 'user_id', 'order_dow', 'order_hour_of_day', 'days_since_prior_order']],
     on='user_id', how="left")
