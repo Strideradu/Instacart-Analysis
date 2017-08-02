@@ -75,7 +75,10 @@ userXproduct["UP_sum_pos_in_cart"] = userXproduct.user_product_id.map(d.sum_pos_
 
 del d
 
-userXproduct['order_id'] = user_product_group['order_id'].shift(0)
+userXproduct.merge(
+    orders[orders['eval_set'] != 'prior'][
+        ['order_id', 'user_id', 'order_dow', 'order_hour_of_day', 'days_since_prior_order']],
+    on='user_id', how="left")
 
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
@@ -90,7 +93,7 @@ userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std
 
 userXproduct['UP_average_pos_in_cart'] = (userXproduct["UP_sum_pos_in_cart"] / userXproduct['UP_nb_orders']).astype(
     np.float32)
-userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
+# userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
 
 usr = pd.DataFrame()
 usr['user_average_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].mean().astype(np.float32)
@@ -99,7 +102,6 @@ usr['user_id'] = usr.index
 userXproduct['user_average_days_between_orders'] = userXproduct.user_id.map(usr.user_average_days_between_orders)
 userXproduct['days_since_ratio'] = userXproduct.days_since_prior_order / userXproduct.user_average_days_between_orders
 del usr
-
 
 # userXproduct['product_average_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].mean().astype(np.float32)
 # userXproduct['product_std_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].std().astype(np.float32)
@@ -116,16 +118,15 @@ userXproduct['UP_orders_since_last_order'] = userXproduct.apply(
     lambda x: np.min(x['user_nb_orders'] - x['UP_order_numbers']), axis=1)
 userXproduct['UP_order_rate_since_first_order'] = userXproduct.apply(
     lambda x: x['UP_orders'] / (x['user_nb_orders'] - np.min(x['UP_order_numbers'])), axis=1)
-"""
-userXproduct['UP_delta_hour_vs_last'] = abs(userXproduct.order_hour_of_day - userXproduct.UP_last_order_id.map(orders.order_hour_of_day)).map(
+
+userXproduct['UP_delta_hour_vs_last'] = abs(
+    userXproduct.order_hour_of_day - userXproduct.UP_last_order_id.map(orders.order_hour_of_day)).map(
     lambda x: min(x, 24 - x)).astype(np.int8)
-"""
 
 orders['cum_day'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum())
 userXproduct['UP_days_since_last_order'] = (
     userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
-    )
-
+)
 
 # Other
 userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(
@@ -174,7 +175,8 @@ userXproduct = userXproduct.merge(UD, on=["user_id", "department_id"], how="left
 userXproduct = userXproduct.drop(
     ['user_nb_orders', 'UP_order_numbers', 'UA_all_orders', 'UD_all_orders', 'user_id', 'product_id', 'aisle_id',
      'department_id', 'user_aisle_id', 'user_department_id', 'UA_order_numbers', 'UD_order_numbers',
-     'user_average_days_between_orders','order_id','UP_last_order_id', 'order_hour_of_day'], axis=1)
+     'user_average_days_between_orders', 'order_id', 'UP_last_order_id', 'order_dow', 'order_hour_of_day',
+     'days_since_prior_order'], axis=1)
 
 print('writing features to csv')
 userXproduct.to_csv(os.path.join(feature_dir, 'userXproduct_features.csv'), index=False)
