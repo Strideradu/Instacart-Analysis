@@ -53,8 +53,8 @@ for row in priors.itertuples():
             row.add_to_cart_order)
     else:
         d[z] = (
-            max(d[z][1], (row.order_number, row.order_id)),
-            d[z][2] + row.add_to_cart_order)
+            max(d[z][0], (row.order_number, row.order_id)),
+            d[z][1] + row.add_to_cart_order)
 
 print('to dataframe (less memory)')
 d = pd.DataFrame.from_dict(d, orient='index')
