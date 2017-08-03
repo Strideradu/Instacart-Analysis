@@ -75,10 +75,7 @@ userXproduct["UP_sum_pos_in_cart"] = userXproduct.user_product_id.map(d.sum_pos_
 
 del d
 
-userXproduct = userXproduct.merge(
-    orders[orders['eval_set'] != 'prior'][
-        ['order_id', 'user_id', 'order_dow', 'order_hour_of_day', 'days_since_prior_order']],
-    on='user_id', how="left")
+
 
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
@@ -94,6 +91,10 @@ userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std
 userXproduct['UP_average_pos_in_cart'] = (userXproduct["UP_sum_pos_in_cart"] / userXproduct['UP_nb_orders']).astype(
     np.float32)
 # userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
+userXproduct = userXproduct.merge(
+    orders[orders['eval_set'] != 'prior'][
+        ['order_id', 'user_id', 'order_dow', 'order_hour_of_day', 'days_since_prior_order']],
+    on='user_id', how="left")
 
 usr = pd.DataFrame()
 usr['user_average_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].mean().astype(np.float32)
