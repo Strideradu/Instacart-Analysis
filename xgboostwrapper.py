@@ -37,5 +37,6 @@ class XGBoostWrapper(object):
         return self.model.predict(d_test)
 
     def plot_importance(self):
-        plot_importance(self.model)
+        fig, ax = plt.subplots(figsize=(20, 12))
+        plot_importance(self.model, ax = ax)
         plt.savefig('/mnt/home/dunan/Learn/Kaggle/instacart/feature_importance.pdf', bbox_inches='tight')
