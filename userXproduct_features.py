@@ -54,13 +54,13 @@ userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean().astype(np.float32)
-userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std().astype(np.float32)
+userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].apply(np.std).astype(np.float32)
 userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])  # ?
 
 userXproduct['UP_average_dows'] = user_product_group['order_dow'].mean().astype(np.float32)
-userXproduct['UP_std_dows'] = user_product_group['order_dow'].std().astype(np.float32)
+userXproduct['UP_std_dows'] = user_product_group['order_dow'].apply(np.std).astype(np.float32)
 userXproduct['UP_average_hour_of_day'] = user_product_group['order_hour_of_day'].mean().astype(np.float32)
-userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std().astype(np.float32)
+userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].apply(np.std).astype(np.float32)
 
 
 # userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
