@@ -130,11 +130,11 @@ userXproduct['days_since_ratio'] = userXproduct.days_since_prior_order / userXpr
 del usr
 # Other
 userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(
-    lambda x: np.sum(x > 1) / x.size)
+    lambda x: np.sum(x > 1) / float(x.size))
 
 userXproduct['order_hour_of_day'] = userXproduct.order_id.map(orders.order_hour_of_day)
 orders['cum_days'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum()).fillna(0)
-userXproduct['UP_days_since_last_order'] = (
+userXproduct['UP_days_since_last_order'] = abs(
     userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
 )
 
