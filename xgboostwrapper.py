@@ -37,7 +37,7 @@ class XGBoostWrapper(object):
         return self.model.predict(d_test)
 
     def print_importance(self, features):
-        print xgb.importance(features, model = self.model)
+        print(xgb.importance(features, model = self.model))
 
     """
     def plot_importance(self):
