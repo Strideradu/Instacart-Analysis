@@ -1,7 +1,7 @@
 import xgboost as xgb
-from xgboost import plot_importance
-import matplotlib.pyplot as plt
-import seaborn as sns
+# from xgboost import plot_importance
+# import matplotlib.pyplot as plt
+# import seaborn as sns
 
 class XGBoostWrapper(object):
 
@@ -36,7 +36,12 @@ class XGBoostWrapper(object):
         d_test = xgb.DMatrix(test)
         return self.model.predict(d_test)
 
+    def print_importance(self, features):
+        print xgb.importance(features, model = self.model)
+
+    """
     def plot_importance(self):
         fig, ax = plt.subplots(figsize=(20, 12))
         plot_importance(self.model, ax = ax)
         plt.savefig('/mnt/home/dunan/Learn/Kaggle/instacart/feature_importance.pdf', bbox_inches='tight')
+    """

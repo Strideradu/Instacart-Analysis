@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb03107b-f57b-4b79-a37f-002924106e81" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userXproduct_features.py" afterPath="$PROJECT_DIR$/userXproduct_features.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prediction.py" afterPath="$PROJECT_DIR$/prediction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xgboostwrapper.py" afterPath="$PROJECT_DIR$/xgboostwrapper.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="722">
@@ -65,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prediction.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prediction.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2596">
-              <caret line="126" column="85" lean-forward="false" selection-start-line="126" selection-start-column="85" selection-end-line="126" selection-end-column="85" />
+            <state relative-caret-position="744">
+              <caret line="128" column="30" lean-forward="true" selection-start-line="128" selection-start-column="30" selection-end-line="128" selection-end-column="30" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -92,8 +93,8 @@
       <file leaf-file-name="xgboostwrapper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/xgboostwrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="880">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="-198">
+              <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -123,9 +124,9 @@
         <option value="$PROJECT_DIR$/order_features.py" />
         <option value="$PROJECT_DIR$/product_features.py" />
         <option value="$PROJECT_DIR$/user_features.py" />
-        <option value="$PROJECT_DIR$/prediction.py" />
-        <option value="$PROJECT_DIR$/xgboostwrapper.py" />
         <option value="$PROJECT_DIR$/userXproduct_features.py" />
+        <option value="$PROJECT_DIR$/xgboostwrapper.py" />
+        <option value="$PROJECT_DIR$/prediction.py" />
       </list>
     </option>
   </component>
@@ -774,14 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xgboostwrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/product_features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2640">
@@ -792,20 +785,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prediction.py">
+    <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2596">
-          <caret line="126" column="85" lean-forward="false" selection-start-line="126" selection-start-column="85" selection-end-line="126" selection-end-column="85" />
+        <state relative-caret-position="722">
+          <caret line="168" column="87" lean-forward="false" selection-start-line="168" selection-start-column="87" selection-end-line="168" selection-end-column="87" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
+    <entry file="file://$PROJECT_DIR$/xgboostwrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="168" column="87" lean-forward="false" selection-start-line="168" selection-start-column="87" selection-end-line="168" selection-end-column="87" />
+        <state relative-caret-position="-198">
+          <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prediction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="128" column="30" lean-forward="true" selection-start-line="128" selection-start-column="30" selection-end-line="128" selection-end-column="30" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
