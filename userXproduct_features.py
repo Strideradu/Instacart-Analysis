@@ -56,6 +56,8 @@ userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int
 # relative add to cart = add_to_cart_order / orders_products.order_size
 
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
+# product ordered by how many users
+# product recorderd by how many users
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean().astype(np.float32)
 # median add to cart

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb03107b-f57b-4b79-a37f-002924106e81" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/product_features.py" afterPath="$PROJECT_DIR$/product_features.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userXproduct_features.py" afterPath="$PROJECT_DIR$/userXproduct_features.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user_features.py" afterPath="$PROJECT_DIR$/user_features.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,8 +33,8 @@
       <file leaf-file-name="product_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/product_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state relative-caret-position="473">
+              <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -58,8 +57,8 @@
       <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="142" column="20" lean-forward="false" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
+            <state relative-caret-position="-26">
+              <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -123,10 +122,10 @@
       <list>
         <option value="$PROJECT_DIR$/userXproduct.py" />
         <option value="$PROJECT_DIR$/order_features.py" />
-        <option value="$PROJECT_DIR$/product_features.py" />
         <option value="$PROJECT_DIR$/prediction.py" />
         <option value="$PROJECT_DIR$/xgboostwrapper.py" />
         <option value="$PROJECT_DIR$/user_features.py" />
+        <option value="$PROJECT_DIR$/product_features.py" />
         <option value="$PROJECT_DIR$/userXproduct_features.py" />
       </list>
     </option>
@@ -281,7 +280,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="2182" height="1402" extended-state="7" />
+    <frame x="-11" y="-11" width="2182" height="1402" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2638758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -778,16 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/product_features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/userXproduct.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -808,10 +797,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/product_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="142" column="20" lean-forward="false" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
+        <state relative-caret-position="-26">
+          <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

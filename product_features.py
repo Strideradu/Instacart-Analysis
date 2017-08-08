@@ -48,11 +48,13 @@ priors = priors.merge(products[['product_id', 'aisle_id', 'department_id']], on=
 
 aisle = pd.DataFrame()
 aisle['aisle_orders'] = priors.groupby(priors.aisle_id).size().astype(np.int32)
+# unique product in aisle
 aisle['aisle_reorders'] = priors['reordered'].groupby(priors.aisle_id).sum().astype(np.int32)
 aisle['aisle_reorder_rate'] = (aisle.aisle_reorders / aisle.aisle_orders).astype(np.float32)
 
 department = pd.DataFrame()
 department['department_orders'] = priors.groupby(priors.department_id).size().astype(np.int32)
+# unique product in dep
 department['department_reorders'] = priors['reordered'].groupby(priors.department_id).sum().astype(np.int32)
 department['department_reorder_rate'] = (department.department_reorders / department.department_orders).astype(
     np.float32)
