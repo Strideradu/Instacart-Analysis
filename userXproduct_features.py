@@ -51,16 +51,24 @@ userXproduct['user_product_id'] = userXproduct.index
 userXproduct['user_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[0]))
 userXproduct['product_id'] = userXproduct['user_product_id'].apply(lambda x: int(x.split("_")[1]))
 
+# order size orders_products.groupby('order_id').size()
+# revert add to cart=order_size - add to cart order
+# relative add to cart = add_to_cart_order / orders_products.order_size
+
 userXproduct['UP_nb_orders'] = user_product_group.size().astype(np.float32)
 userXproduct['UP_reorders'] = priors.groupby('user_product_id')['reordered'].sum()
 userXproduct['UP_mean_add_to_cart'] = user_product_group['add_to_cart_order'].mean().astype(np.float32)
+# median add to cart
 userXproduct['UP_std_add_to_cart'] = user_product_group['add_to_cart_order'].std().fillna(0.0).astype(np.float32)
+# up first order
 userXproduct['UP_last_add_to_cart'] = user_product_group['add_to_cart_order'].apply(lambda x: x.iloc[-1])  # ?
 
 userXproduct['UP_average_dows'] = user_product_group['order_dow'].mean().astype(np.float32)
 userXproduct['UP_std_dows'] = user_product_group['order_dow'].std().fillna(0.0).astype(np.float32)
+# median
 userXproduct['UP_average_hour_of_day'] = user_product_group['order_hour_of_day'].mean().astype(np.float32)
 userXproduct['UP_std_hour_of_day'] = user_product_group['order_hour_of_day'].std().fillna(0.0).astype(np.float32)
+# median
 
 
 # userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
@@ -131,6 +139,8 @@ del usr
 # Other
 userXproduct['user_reorder_probability'] = userXproduct.groupby('user_id')['UP_orders'].transform(
     lambda x: np.sum(x > 1) / float(x.size))
+# dep reorder ratio
+# aisle reordr ratio
 
 userXproduct['order_hour_of_day'] = userXproduct.order_id.map(orders.order_hour_of_day)
 orders['cum_days'] = orders.groupby('user_id')['days_since_prior_order'].apply(lambda x: x.cumsum()).fillna(0)

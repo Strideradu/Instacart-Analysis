@@ -45,6 +45,7 @@ priors = priors.merge(orders, on="order_id", how="left")
 usr = pd.DataFrame()
 usr['user_average_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].mean().astype(np.float32)
 usr['user_std_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].std().astype(np.float32)
+# median_days_since_prior_order
 usr['user_sum_days_between_orders'] = orders.groupby('user_id')['days_since_prior_order'].sum().astype(np.float32)
 usr['user_nb_orders'] = orders.groupby('user_id').size().astype(np.float32)
 usr['user_average_dows'] = orders.groupby('user_id')['order_dow'].mean().astype(np.float32)
