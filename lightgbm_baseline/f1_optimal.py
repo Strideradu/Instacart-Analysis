@@ -4,6 +4,7 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 from utils import fast_search
+from f1_optimizer import generate_prediction
 
 none_product = 50000
 
@@ -15,7 +16,7 @@ def create_products(df):
     # print(df.product_id.values.shape)
     products = df.product_id.values
     prob = df.prediction.values
-
+    """
     sort_index = np.argsort(prob)[::-1]
 
     values = fast_search(prob[sort_index][0:80], dtype=np.float64)
@@ -25,8 +26,12 @@ def create_products(df):
     print('iteration', df.shape[0], 'optimal value', index)
 
     best = ' '.join(map(lambda x: str(x) if x != none_product else 'None', products[sort_index][0:index]))
+    """
+    best = generate_prediction(prob)
     df = df[0:1]
     df.loc[:, 'products'] = best
+
+
     return df
 
 if __name__ == '__main__':
