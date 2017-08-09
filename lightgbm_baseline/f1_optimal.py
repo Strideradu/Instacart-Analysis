@@ -5,8 +5,7 @@ import multiprocessing
 
 from utils import fast_search
 from f1_optimizer import generate_prediction
-
-none_product = 50000
+#none_product = 50000
 
 def applyParallel(dfGrouped, func):
     retLst = Parallel(n_jobs=multiprocessing.cpu_count())(delayed(func)(group) for name, group in dfGrouped)
@@ -43,6 +42,7 @@ def create_products(df):
 
 if __name__ == '__main__':
     data = pd.read_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/prediction_lgbm.pkl')
+    """
     data['not_a_product'] = 1. - data.prediction
 
     gp = data.groupby('order_id')['not_a_product'].apply(lambda x: np.multiply.reduce(x.values)).reset_index()
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     data.product_id = data.product_id.astype(np.uint32)
 
     data = data.loc[data.prediction > 0.01, ['order_id', 'prediction', 'product_id']]
-
+    """
     data = applyParallel(data.groupby(data.order_id), create_products).reset_index()
 
     data[['order_id', 'products']].to_csv('/mnt/home/dunan/Learn/Kaggle/instacart/data/sub.csv', index=False)
