@@ -27,7 +27,7 @@ def create_products(df):
 
     best = ' '.join(map(lambda x: str(x) if x != none_product else 'None', products[sort_index][0:index]))
     """
-    best = generate_prediction(prob)
+    best = generate_prediction(prob, products)
     df = df[0:1]
     df.loc[:, 'products'] = best
 
@@ -35,7 +35,7 @@ def create_products(df):
     return df
 
 if __name__ == '__main__':
-    data = pd.read_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/prediction_rnn.pkl')
+    data = pd.read_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/prediction_lgbm.pkl')
     data['not_a_product'] = 1. - data.prediction
 
     gp = data.groupby('order_id')['not_a_product'].apply(lambda x: np.multiply.reduce(x.values)).reset_index()
