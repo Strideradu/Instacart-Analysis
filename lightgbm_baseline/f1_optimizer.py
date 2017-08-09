@@ -80,10 +80,10 @@ class F1Optimizer():
         beta_squared = beta ** 2
         return (1.0 + beta_squared) * tp / ((1.0 + beta_squared) * tp + fp + beta_squared * fn)
 
-def generate_prediction(P, pNone=None):
+def generate_prediction(P, products, pNone=None):
     Pidx = np.argsort(P)[::-1]
     P = P[Pidx]
-    # p_list = p_list[Pidx]
+    p_list = products[Pidx]
     # p_list = [p_list[i] for i in Pidx]
     n = P.shape[0]
 
