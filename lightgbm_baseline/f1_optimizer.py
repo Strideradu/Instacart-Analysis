@@ -84,7 +84,7 @@ def generate_prediction(P, products, pNone=None):
     sort_index = np.argsort(P)[::-1]
     P = np.sort(P)[::-1]
     n = P.shape[0]
-    L = ['L{}'.format(i + 1) for i in range(n)]
+    L = ['{}'.format(products[i]) for i in range(n)]
 
     if pNone is None:
         # print("Estimate p(None|x) as (1-p_1)*(1-p_2)*...*(1-p_n)")
@@ -95,7 +95,7 @@ def generate_prediction(P, products, pNone=None):
     #print("p(None|x)={}".format(pNone))
 
     opt = F1Optimizer.maximize_expectation(P, pNone)
-    best_prediction = ['None'] if opt[1] else products[:opt[0]]
+    best_prediction = ['None'] if opt[1] else L[:opt[0]]
     """
     print(opt[0])
     print(products[:opt[0]])
