@@ -99,9 +99,10 @@ def generate_prediction(P, products, pNone=None):
     print(opt[0])
     best_prediction += (products[:opt[0]])
     f1_max = opt[2]
-    print(best_prediction)
+    print("best_prediction", best_prediction)
+    best = ' '.join(best_prediction)
 
-    return best_prediction
+    return best
 
 
 def print_best_prediction(P, pNone=None):
