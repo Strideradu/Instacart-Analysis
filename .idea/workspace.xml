@@ -128,8 +128,8 @@
       <file leaf-file-name="f1_optimizer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="878">
-              <caret line="100" column="4" lean-forward="false" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+            <state relative-caret-position="1094">
+              <caret line="108" column="24" lean-forward="true" selection-start-line="108" selection-start-column="24" selection-end-line="108" selection-end-column="24" />
               <folding>
                 <element signature="e#47#65#0" expanded="true" />
               </folding>
@@ -726,7 +726,7 @@
         <state relative-caret-position="1701">
           <caret line="70" column="75" lean-forward="false" selection-start-line="70" selection-start-column="75" selection-end-line="70" selection-end-column="75" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -823,8 +823,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="878">
-          <caret line="100" column="4" lean-forward="false" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+        <state relative-caret-position="1094">
+          <caret line="108" column="24" lean-forward="true" selection-start-line="108" selection-start-column="24" selection-end-line="108" selection-end-column="24" />
           <folding>
             <element signature="e#47#65#0" expanded="true" />
           </folding>

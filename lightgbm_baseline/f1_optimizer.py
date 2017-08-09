@@ -91,8 +91,8 @@ def generate_prediction(P, products, pNone=None):
         pNone = (1.0 - P).prod()
 
     PL = ['p({}|x)={}'.format(l, p) for l, p in zip(L, P)]
-    print("Posteriors: {} (n={})".format(PL, n))
-    print("p(None|x)={}".format(pNone))
+    #print("Posteriors: {} (n={})".format(PL, n))
+    #print("p(None|x)={}".format(pNone))
 
     opt = F1Optimizer.maximize_expectation(P, pNone)
     best_prediction = ['None'] if opt[1] else []
