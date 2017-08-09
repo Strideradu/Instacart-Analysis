@@ -28,7 +28,10 @@ def create_products(df):
     """
     index, bool_none = generate_prediction(prob)
 
-    best = ' '.join(map(lambda x: str(x) if not(bool_none) else 'None', products[sort_index][0:index]))
+    if bool_none:
+        best = "None"
+    else:
+        best = ' '.join(map(lambda x: str(x), products[sort_index][0:index]))
 
     # best = generate_prediction(prob, products)
     df = df[0:1]
