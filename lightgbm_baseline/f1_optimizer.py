@@ -84,7 +84,7 @@ def generate_prediction(P, pNone=None):
     # sort_index = np.argsort(P)[::-1]
     P = np.sort(P)[::-1]
     n = P.shape[0]
-    L = ['{}'.format(products[i]) for i in range(n)]
+    L = ['{}'.format(i + 1) for i in range(n)]
 
     if pNone is None:
         # print("Estimate p(None|x) as (1-p_1)*(1-p_2)*...*(1-p_n)")
