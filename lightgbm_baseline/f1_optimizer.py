@@ -81,34 +81,23 @@ class F1Optimizer():
         return (1.0 + beta_squared) * tp / ((1.0 + beta_squared) * tp + fp + beta_squared * fn)
 
 def generate_prediction(P, pNone=None):
-    # sort_index = np.argsort(P)[::-1]
-    P = np.sort(P)[::-1]
+    Pidx = np.argsort(P)[::-1]
+    P = P[Pidx]
+    # p_list = p_list[Pidx]
+    # p_list = [p_list[i] for i in Pidx]
     n = P.shape[0]
-    L = ['{}'.format(i + 1) for i in range(n)]
 
     if pNone is None:
-        # print("Estimate p(None|x) as (1-p_1)*(1-p_2)*...*(1-p_n)")
         pNone = (1.0 - P).prod()
 
-    PL = ['p({}|x)={}'.format(l, p) for l, p in zip(L, P)]
-    #print("Posteriors: {} (n={})".format(PL, n))
-    #print("p(None|x)={}".format(pNone))
-
     opt = F1Optimizer.maximize_expectation(P, pNone)
-    """
-    best_prediction = ['None'] if opt[1] else L[:opt[0]]
+    best_prediction = ['None'] if opt[1] else []
+    other_products = p_list[:opt[0]].tolist()
+    assert len(other_products) == opt[0]
+    best_prediction.extend(other_products)
+    # f1_max = opt[2]
 
-    print(opt[0])
-    print(products[:opt[0]])
-    best_prediction += (products[:opt[0]])
-
-    f1_max = opt[2]
-    print("best_prediction", best_prediction)
-    best = ' '.join(best_prediction)
-    """
-
-
-    return opt[0], opt[1]
+    return best_prediction
 
 
 def print_best_prediction(P, pNone=None):

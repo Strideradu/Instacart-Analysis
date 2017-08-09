@@ -16,24 +16,24 @@ def create_products(df):
     # print(df.product_id.values.shape)
     products = df.product_id.values
     prob = df.prediction.values
-
+    """
     sort_index = np.argsort(prob)[::-1]
 
-    """
+
     values = fast_search(prob[sort_index][0:80], dtype=np.float64)
 
     index = np.argmax(values)
 
     print('iteration', df.shape[0], 'optimal value', index)
-    """
+
     index, bool_none = generate_prediction(prob)
 
     if bool_none:
         best = "None"
     else:
         best = ' '.join(map(lambda x: str(x), products[sort_index][0:index]))
-
-    # best = generate_prediction(prob, products)
+    """
+    best = generate_prediction(prob, products)
     df = df[0:1]
     df.loc[:, 'products'] = best
 
