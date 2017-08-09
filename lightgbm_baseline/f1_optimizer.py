@@ -95,7 +95,7 @@ def generate_prediction(P, products, pNone=None):
     #print("p(None|x)={}".format(pNone))
 
     opt = F1Optimizer.maximize_expectation(P, pNone)
-    best_prediction = ['None'] if opt[1] else [products[:opt[0]]]
+    best_prediction = ['None'] if opt[1] else products[:opt[0]]
     """
     print(opt[0])
     print(products[:opt[0]])
