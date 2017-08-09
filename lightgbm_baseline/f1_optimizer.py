@@ -99,6 +99,7 @@ def generate_prediction(P, products, pNone=None):
     print(opt[0])
     best_prediction += (products[:opt[0]])
     f1_max = opt[2]
+    print(best_prediction)
 
     return best_prediction
 
