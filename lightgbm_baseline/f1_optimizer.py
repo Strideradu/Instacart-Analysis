@@ -92,7 +92,7 @@ def generate_prediction(P, products, pNone=None):
 
     print(P)
     print(Pidx)
-    opt = F1Optimizer.maximize_expectation(Pidx, pNone)
+    opt = F1Optimizer.maximize_expectation(P, pNone)
     best_prediction = ['None'] if opt[1] else []
     other_products = p_list[:opt[0]].tolist()
     assert len(other_products) == opt[0]
