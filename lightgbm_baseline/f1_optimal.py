@@ -34,10 +34,7 @@ def create_products(df):
         best = ' '.join(map(lambda x: str(x), products[sort_index][0:index]))
     """
     best = generate_prediction(prob, products)
-    if best[0] == "None":
-        best = "None"
-    else:
-        best = " ".join(map(lambda x: str(x), best))
+    best = ' '.join(map(lambda x: str(x), prod_f1))
     df = df[0:1]
     df.loc[:, 'products'] = best
 
