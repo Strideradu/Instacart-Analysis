@@ -34,7 +34,7 @@ def create_products(df):
         best = ' '.join(map(lambda x: str(x), products[sort_index][0:index]))
     """
     best = generate_prediction(prob, products)
-    best = ' '.join(map(lambda x: str(x), prod_f1))
+    best = ' '.join(map(lambda x: str(x), best))
     df = df[0:1]
     df.loc[:, 'products'] = best
 
