@@ -90,8 +90,6 @@ def generate_prediction(P, products, pNone=None):
     if pNone is None:
         pNone = (1.0 - P).prod()
 
-    print(P)
-    print(Pidx)
     opt = F1Optimizer.maximize_expectation(P, pNone)
     best_prediction = ['None'] if opt[1] else []
     other_products = p_list[:opt[0]].tolist()
