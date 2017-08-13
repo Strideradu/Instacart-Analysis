@@ -3,22 +3,12 @@ import pandas as pd
 import numpy as np
 import os
 import arboretum
-import lightgbm as lgb
 import json
 import sklearn.metrics
 from sklearn.metrics import f1_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 from scipy.sparse import dok_matrix, coo_matrix
 from sklearn.utils.multiclass import  type_of_target
-
-
-
-def fscore(true_value_matrix, prediction, order_index, product_index, rows, cols, threshold=[0.5]):
-
-    prediction_value_matrix = coo_matrix((prediction, (order_index, product_index)), shape=(rows, cols), dtype=np.float32)
-    # prediction_value_matrix.eliminate_zeros()
-
-    return list(map(lambda x: f1_score(true_value_matrix, prediction_value_matrix > x, average='samples'), threshold))
 
 
 if __name__ == '__main__':
@@ -257,48 +247,68 @@ if __name__ == '__main__':
         # 'order_hour_of_day_median'
     ]
     features.extend(embedings)
-    categories = ['product_id', 'aisle_id', 'department_id']
-    features.extend(embedings)
-    cat_features = ','.join(map(lambda x: str(x + len(features)), range(len(categories))))
-    features.extend(categories)
 
     print('not included', set(order_train.columns.tolist()) - set(features))
 
-    data = order_train[features]
+    data = order_train[features].fillna(-1.).values.astype(np.float32)
+
+    data_categoties = order_train[['product_id', 'aisle_id', 'department_id']].values.astype(np.uint32)
     labels = order_train[['reordered']].values.astype(np.float32).flatten()
 
-    data_val = order_test[features]
+    data_val = order_test[features].fillna(-1.).values.astype(np.float32)
+
+    data_categoties_val = order_test[['product_id', 'aisle_id', 'department_id']].values.astype(np.uint32)
+
+    print(data.shape, data_val.shape)
 
     assert data.shape[0] == 8474661
 
-    lgb_train = lgb.Dataset(data, labels, categorical_feature=cat_features)
+    config = json.dumps({'objective': 1,
+                         'internals':
+                             {
+                                 'compute_overlap': 3,
+                                 'double_precision': True
+                             },
+                         'verbose':
+                             {
+                                 'gpu': True,
+                                 'booster': True,
+                                 'data': True
+                             },
+                         'tree':
+                             {
+                                 'eta': 0.01,
+                                 'max_depth': 10,
+                                 'gamma': 0.0,
+                                 'min_child_weight': 20.0,
+                                 'min_leaf_size': 0,
+                                 'colsample_bytree': 0.6,
+                                 'colsample_bylevel': 0.6,
+                                 'lambda': 0.1,
+                                 'gamma_relative': 0.0001
+                             }})
 
-    # specify your configurations as a dict
-    params = {
-        'task': 'train',
-        'boosting_type': 'gbdt',
-        'objective': 'binary',
-        'metric': {'binary_logloss', 'auc'},
-        'num_leaves': 256,
-        'min_sum_hessian_in_leaf': 20,
-        'max_depth': 12,
-        'learning_rate': 0.05,
-        'feature_fraction': 0.6,
-        # 'bagging_fraction': 0.9,
-        # 'bagging_freq': 3,
-        'verbose': 1
-    }
+    print(config)
 
-    print('Start training...')
-    # train
-    gbm = lgb.train(params,
-                    lgb_train,
-                    num_boost_round=380)
+    data = arboretum.DMatrix(data, data_category=data_categoties, y=labels)
+    data_val = arboretum.DMatrix(data_val, data_category=data_categoties_val)
 
-    prediction = gbm.predict(data_val)
-    # prediction = model.predict(data_val)
+    model = arboretum.Garden(config, data)
+
+    print('training...')
+
+    # grow trees
+    for i in range(7400):
+        print('tree', i)
+        model.grow_tree()
+        model.append_last_tree(data_val)
+        if i % 20 == 0:
+            pred = model.get_y(data)
+            print('train', sklearn.metrics.log_loss(labels, pred, eps=1e-6), roc_auc_score(labels, pred))
+
+    prediction = model.predict(data_val)
     orders = order_test.order_id.values
     products = order_test.product_id.values
 
     result = pd.DataFrame({'product_id': products, 'order_id': orders, 'prediction': prediction})
-    result.to_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/prediction_lgbm.pkl')
+    result.to_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/prediction_arboretum.pkl')
