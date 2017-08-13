@@ -2,7 +2,7 @@ import gc
 import pandas as pd
 import numpy as np
 import os
-# import arboretum
+import arboretum
 import lightgbm as lgb
 import json
 import sklearn.metrics
@@ -271,7 +271,7 @@ if __name__ == '__main__':
 
     assert data.shape[0] == 8474661
 
-    lgb_train = lgb.Dataset(data, labels, categorical_feature=categories)
+    lgb_train = lgb.Dataset(data, labels, categorical_feature=cat_features)
 
     # specify your configurations as a dict
     params = {

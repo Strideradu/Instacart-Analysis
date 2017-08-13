@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb03107b-f57b-4b79-a37f-002924106e81" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py" afterPath="$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lightgbm_baseline/arboretum_submition.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py" afterPath="$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -90,14 +90,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="f1_optimal.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py">
+      <file leaf-file-name="lgbm_submition.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="93" column="48" lean-forward="true" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="843">
+              <caret line="49" column="108" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arboretum_submition.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lightgbm_baseline/arboretum_submition.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="49" column="108" lean-forward="false" selection-start-line="49" selection-start-column="108" selection-end-line="49" selection-end-column="108" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,7 +113,7 @@
       <file leaf-file-name="f1_optimizer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2403">
+            <state relative-caret-position="230">
               <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
                 <element signature="e#47#65#0" expanded="true" />
@@ -144,11 +152,12 @@
         <option value="$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/skip_gram_train.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/skip_gram_get.py" />
-        <option value="$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/utils.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/lgbm_cv.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/f1_optimizer.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py" />
+        <option value="$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py" />
+        <option value="$PROJECT_DIR$/lightgbm_baseline/arboretum_submition.py" />
       </list>
     </option>
   </component>
@@ -418,13 +427,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/prediction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/xgboostwrapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -755,13 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="303" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lightgbm_baseline/lgbm_cv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="851">
@@ -781,7 +776,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2403">
+        <state relative-caret-position="230">
           <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
             <element signature="e#47#65#0" expanded="true" />
@@ -791,11 +786,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="93" column="48" lean-forward="true" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
+        <state relative-caret-position="203">
+          <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lightgbm_baseline/lgbm_submition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="843">
+          <caret line="49" column="108" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lightgbm_baseline/arboretum_submition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="49" column="108" lean-forward="false" selection-start-line="49" selection-start-column="108" selection-end-line="49" selection-end-column="108" />
+          <folding />
         </state>
       </provider>
     </entry>
