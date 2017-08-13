@@ -299,3 +299,10 @@ if __name__ == '__main__':
                     )
 
     print(history)
+    num_keys = len(history.keys())
+    num_steps = len(history[list(history.keys())[0]])
+    for step in range(num_steps):
+        for key in history.keys():
+            print(step, key, history[key][num_steps])
+
+        print("\n")
