@@ -73,6 +73,13 @@ userXproduct['UP_median_hour_of_day'] = user_product_group['order_hour_of_day'].
 # products how many user odered
 # product how many use reordered
 
+
+#order_size  = pd.DataFrame()
+order_size['order_size'] = priors.groupby('order_id').size()
+priors = priors.merge(order_size, on="order_id", how="left")
+userXproduct['average_order_size'] = priors.groupby('user_product_id')['order_size'].mean().astype(np.float32)
+userXproduct['UP_revert_add_to_cart'] = userXproduct.average_order_size - userXproduct.UP_mean_add_to_cart
+userXproduct['relative_add_to_cart'] = userXproduct.UP_mean_add_to_cart / float(userXproduct.average_order_size)
 # userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
 
 
@@ -150,9 +157,7 @@ userXproduct['UP_days_since_last_order'] = abs(
     userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
 )
 
-prods['order_size'] = priors.groupby('order_id').size()
-products['revert_add_to_cart'] = products.order_size - products.add_to_cart_order
-products['relative_add_to_cart'] = products.add_to_cart_order / float(products.order_size)
+
 
 # aisle and department features
 priors = priors.merge(products, on="product_id", how="left")
