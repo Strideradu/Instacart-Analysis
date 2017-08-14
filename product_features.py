@@ -48,6 +48,7 @@ priors = priors.merge(products[['product_id', 'aisle_id', 'department_id']], on=
 
 aisle = pd.DataFrame()
 aisle['aisle_orders'] = priors.groupby(priors.aisle_id).size().astype(np.int32)
+aisle['aisle_nb_product'] = priors.groupby(priors.aisle_id)['product_id'].apply(lambda x: x.nunique())
 # unique product in aisle
 aisle['aisle_reorders'] = priors['reordered'].groupby(priors.aisle_id).sum().astype(np.int32)
 aisle['aisle_reorder_rate'] = (aisle.aisle_reorders / aisle.aisle_orders).astype(np.float32)
@@ -55,11 +56,18 @@ aisle['aisle_reorder_rate'] = (aisle.aisle_reorders / aisle.aisle_orders).astype
 department = pd.DataFrame()
 department['department_orders'] = priors.groupby(priors.department_id).size().astype(np.int32)
 # unique product in dep
+department['department_nb_product'] = priors.groupby(priors.department_id)['product_id'].apply(lambda x: x.nunique())
 department['department_reorders'] = priors['reordered'].groupby(priors.department_id).sum().astype(np.int32)
 department['department_reorder_rate'] = (department.department_reorders / department.department_orders).astype(
     np.float32)
 
 priors = priors.merge(orders, on="order_id", how='left')
+prods['nb_users'] = priors.groupby('product_id')['user_id'].apply(lambda x: x.nunique())
+prods['nb_users_reordered'] = priors.groupby('product_id').loc[priors.reordered > 0, :]['user_id'].apply(
+    lambda x: x.nunique())
+# prods['all_users'] = priors.groupby('product_id')['user_id'].apply(set)
+# prods['nb_users'] = (prod.all_users.map(len)).astype(np.float32)
+
 prods['product_average_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].mean().astype(
     np.float32)
 prods['product_std_days_between_orders'] = priors.groupby('product_id')['days_since_prior_order'].std().astype(
@@ -87,9 +95,16 @@ prods['department_avearage_hour_of_day'] = priors.groupby('department_id')['orde
     np.float32)
 prods['department_std_hour_of_day'] = priors.groupby('department_id')['order_hour_of_day'].std().astype(np.float32)
 
+# order size orders_products.groupby('order_id').size()
+# revert add to cart=order_size - add to cart order
+# relative add to cart = add_to_cart_order / orders_products.order_size
+prods['order_size'] = priors.groupby('order_id').size()
+
 products = products.join(prods, on='product_id')
 products = products.join(aisle, on='aisle_id')
 products = products.join(department, on='department_id')
+products['revert_add_to_cart'] = products.order_size - products.add_to_cart_order
+products['relative_add_to_cart'] = products.add_to_cart_order / float(products.order_size)
 products = products[['product_id',
                      'product_orders',
                      'product_reorders',
@@ -117,7 +132,14 @@ products = products[['product_id',
                      'aisle_avearage_hour_of_day',
                      'aisle_std_hour_of_day',
                      'department_avearage_hour_of_day',
-                     'department_std_hour_of_day'
+                     'department_std_hour_of_day',
+                     'order_size',
+                     'revert_add_to_cart',
+                     'relative_add_to_cart',
+                     'nb_users',
+                     'nb_users_reordered',
+                     'aisle_nb_product',
+                     'department_nb_product'
                      ]]
 
 print('writing features to csv')
