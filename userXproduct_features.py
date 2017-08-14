@@ -80,7 +80,7 @@ order_size['order_id'] = order_size.index
 priors = priors.merge(order_size, on="order_id", how="left")
 userXproduct['average_order_size'] = priors.groupby('user_product_id')['order_size'].mean().astype(np.float32)
 userXproduct['UP_revert_add_to_cart'] = userXproduct.average_order_size - userXproduct.UP_mean_add_to_cart
-userXproduct['relative_add_to_cart'] = userXproduct.UP_mean_add_to_cart / float(userXproduct.average_order_size)
+userXproduct['relative_add_to_cart'] = userXproduct.UP_mean_add_to_cart / userXproduct.average_order_size
 # userXproduct['days_since_prior_order'] = priors.order_id.map(orders.days_since_prior_order)
 
 
