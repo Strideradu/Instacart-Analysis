@@ -50,6 +50,7 @@ features = [('product_features.csv', 'product_id'),
 customers = pickle.load(open(os.path.join(feature_dir, "customers.p"), "rb"))
 train_customers = customers['train_customers'][:]
 valid_customers = customers['valid_customers']
+train_customers = pd.concat([train_customers, valid_customers])
 test_customers = customers['test_customers']
 
 userXproduct = pd.read_csv(os.path.join(feature_dir, "userXproduct.csv"))
@@ -94,8 +95,8 @@ print('Start training...')
 gbm = lgb.train(params,
                 lgb_train,
                 valid_sets=lgb_valid,
-                early_stopping_rounds=100,
-                num_boost_round=2000)
+                # early_stopping_rounds=100,
+                num_boost_round=440)
 
 prediction = gbm.predict(X_valid[f_to_use])
 X_valid['preds'] = prediction
