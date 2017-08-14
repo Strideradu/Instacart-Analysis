@@ -10,7 +10,7 @@ import sklearn.metrics
 from sklearn.metrics import f1_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 from scipy.sparse import dok_matrix, coo_matrix
-from sklearn.utils.multiclass import  type_of_target
+from sklearn.utils.multiclass import type_of_target
 
 feature_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/features/"
 
@@ -69,11 +69,10 @@ X_valid, Y_valid = build_features(valid, features)
 categories = ['product_id']
 
 f_to_use = X_train.columns
-f_to_use = [e for e in f_to_use if e not in ('user_product_id','user_id','order_id')]
+f_to_use = [e for e in f_to_use if e not in ('user_product_id', 'user_id', 'order_id')]
 
 lgb_train = lgb.Dataset(X_train[f_to_use], Y_train, categorical_feature=categories)
 lgb_valid = lgb.Dataset(X_valid[f_to_use], Y_valid, categorical_feature=categories)
-
 
 params = {
     'task': 'train',
@@ -95,30 +94,30 @@ print('Start training...')
 gbm = lgb.train(params,
                 lgb_train,
                 valid_sets=lgb_valid,
-early_stopping_rounds = 100,
-                num_boost_round=1500)
+                early_stopping_rounds=100,
+                num_boost_round=2000)
 
 prediction = gbm.predict(X_valid[f_to_use])
 X_valid['preds'] = prediction
 
 # Set threshold to optimize F1 score
-thresholds = np.linspace(0,0.5,50)
+thresholds = np.linspace(0, 0.5, 50)
 
 best_score = 0.
 for t in thresholds:
-    X_valid['preds_binary'] = (X_valid['preds']>t).map(int)
-    score = f1_score(Y_valid,X_valid['preds_binary'])
-    if score>best_score:
+    X_valid['preds_binary'] = (X_valid['preds'] > t).map(int)
+    score = f1_score(Y_valid, X_valid['preds_binary'])
+    if score > best_score:
         best_score = score
         threshold = t
 
-print("F1 score",best_score,"Threshold:",threshold)
+print("F1 score", best_score, "Threshold:", threshold)
 
 ########################################################################
 ### Predict and submit test set
 ########################################################################
 
-X_test,_ = build_features(test,features)
+X_test, _ = build_features(test, features)
 prediction = gbm.predict(X_test[f_to_use])
 
 orders = X_test.order_id.values
