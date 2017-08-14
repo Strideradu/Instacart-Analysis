@@ -50,7 +50,7 @@ features = [('product_features.csv', 'product_id'),
 customers = pickle.load(open(os.path.join(feature_dir, "customers.p"), "rb"))
 train_customers = customers['train_customers'][:]
 valid_customers = customers['valid_customers']
-train_customers = pd.concat([train_customers, valid_customers])
+train_customers = train_customers + valid_customers
 test_customers = customers['test_customers']
 
 userXproduct = pd.read_csv(os.path.join(feature_dir, "userXproduct.csv"))
