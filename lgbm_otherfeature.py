@@ -2,9 +2,15 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
+import gc
 
-from sklearn.metrics import f1_score
+import lightgbm as lgb
+import json
+import sklearn.metrics
+from sklearn.metrics import f1_score, roc_auc_score
 from sklearn.model_selection import train_test_split
+from scipy.sparse import dok_matrix, coo_matrix
+from sklearn.utils.multiclass import  type_of_target
 
 feature_dir = "/mnt/home/dunan/Learn/Kaggle/instacart/features/"
 
