@@ -74,7 +74,7 @@ userXproduct['UP_median_hour_of_day'] = user_product_group['order_hour_of_day'].
 # product how many use reordered
 
 
-#order_size  = pd.DataFrame()
+order_size  = pd.DataFrame()
 order_size['order_size'] = priors.groupby('order_id').size()
 priors = priors.merge(order_size, on="order_id", how="left")
 userXproduct['average_order_size'] = priors.groupby('user_product_id')['order_size'].mean().astype(np.float32)
