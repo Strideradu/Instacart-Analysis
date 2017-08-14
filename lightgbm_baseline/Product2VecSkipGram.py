@@ -95,7 +95,7 @@ class Product2VecSkipGram:
 
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
-        self.saver = tf.train.Saver()
+        self.saver = tf.train.Saver(max_to_keep = 10)
 
 
     def inc(self):

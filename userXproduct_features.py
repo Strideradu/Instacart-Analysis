@@ -150,6 +150,10 @@ userXproduct['UP_days_since_last_order'] = abs(
     userXproduct.order_id.map(orders.cum_days) - userXproduct.UP_last_order_id.map(orders.cum_days)
 )
 
+prods['order_size'] = priors.groupby('order_id').size()
+products['revert_add_to_cart'] = products.order_size - products.add_to_cart_order
+products['relative_add_to_cart'] = products.add_to_cart_order / float(products.order_size)
+
 # aisle and department features
 priors = priors.merge(products, on="product_id", how="left")
 

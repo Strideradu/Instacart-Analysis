@@ -63,7 +63,7 @@ department['department_reorder_rate'] = (department.department_reorders / depart
 
 priors = priors.merge(orders, on="order_id", how='left')
 prods['nb_users'] = priors.groupby('product_id')['user_id'].apply(lambda x: x.nunique())
-prods['nb_users_reordered'] = priors.groupby('product_id').loc[priors.reordered > 0, :]['user_id'].apply(
+prods['nb_users_reordered'] = priors.loc[priors.reordered > 0, :].groupby('product_id')['user_id'].apply(
     lambda x: x.nunique())
 # prods['all_users'] = priors.groupby('product_id')['user_id'].apply(set)
 # prods['nb_users'] = (prod.all_users.map(len)).astype(np.float32)
@@ -98,13 +98,10 @@ prods['department_std_hour_of_day'] = priors.groupby('department_id')['order_hou
 # order size orders_products.groupby('order_id').size()
 # revert add to cart=order_size - add to cart order
 # relative add to cart = add_to_cart_order / orders_products.order_size
-prods['order_size'] = priors.groupby('order_id').size()
 
 products = products.join(prods, on='product_id')
 products = products.join(aisle, on='aisle_id')
 products = products.join(department, on='department_id')
-products['revert_add_to_cart'] = products.order_size - products.add_to_cart_order
-products['relative_add_to_cart'] = products.add_to_cart_order / float(products.order_size)
 products = products[['product_id',
                      'product_orders',
                      'product_reorders',
@@ -133,9 +130,6 @@ products = products[['product_id',
                      'aisle_std_hour_of_day',
                      'department_avearage_hour_of_day',
                      'department_std_hour_of_day',
-                     'order_size',
-                     'revert_add_to_cart',
-                     'relative_add_to_cart',
                      'nb_users',
                      'nb_users_reordered',
                      'aisle_nb_product',

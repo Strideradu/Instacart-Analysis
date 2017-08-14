@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb03107b-f57b-4b79-a37f-002924106e81" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py" afterPath="$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/product_features.py" afterPath="$PROJECT_DIR$/product_features.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userXproduct_features.py" afterPath="$PROJECT_DIR$/userXproduct_features.py" />
     </list>
@@ -44,8 +44,8 @@
       <file leaf-file-name="userXproduct_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4374">
-              <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="67" />
+            <state relative-caret-position="864">
+              <caret line="154" column="90" lean-forward="false" selection-start-line="154" selection-start-column="90" selection-end-line="154" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -84,8 +84,8 @@
       <file leaf-file-name="product_features.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/product_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="959">
-              <caret line="121" column="62" lean-forward="true" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
+            <state relative-caret-position="824">
+              <caret line="134" column="40" lean-forward="true" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -104,8 +104,8 @@
       <file leaf-file-name="Product2VecSkipGram.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
-              <caret line="70" column="75" lean-forward="false" selection-start-line="70" selection-start-column="75" selection-end-line="70" selection-end-column="75" />
+            <state relative-caret-position="486">
+              <caret line="97" column="52" lean-forward="false" selection-start-line="97" selection-start-column="52" selection-end-line="97" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -148,7 +148,6 @@
         <option value="$PROJECT_DIR$/lightgbm_baseline/orders_comsum.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/user_product_rank.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/create_prod2vec_dataset.py" />
-        <option value="$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/skip_gram_train.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/skip_gram_get.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/utils.py" />
@@ -157,6 +156,7 @@
         <option value="$PROJECT_DIR$/lightgbm_baseline/arboretum_submition.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/f1_optimal.py" />
         <option value="$PROJECT_DIR$/lightgbm_baseline/lgbm_cv.py" />
+        <option value="$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py" />
         <option value="$PROJECT_DIR$/userXproduct_features.py" />
         <option value="$PROJECT_DIR$/product_features.py" />
       </list>
@@ -423,7 +423,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -740,14 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
-          <caret line="70" column="75" lean-forward="false" selection-start-line="70" selection-start-column="75" selection-end-line="70" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lightgbm_baseline/skip_gram_train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -798,18 +790,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lightgbm_baseline/Product2VecSkipGram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="97" column="52" lean-forward="false" selection-start-line="97" selection-start-column="52" selection-end-line="97" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/userXproduct_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4374">
-          <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="67" />
+        <state relative-caret-position="864">
+          <caret line="154" column="90" lean-forward="false" selection-start-line="154" selection-start-column="90" selection-end-line="154" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/product_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="959">
-          <caret line="121" column="62" lean-forward="true" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
+        <state relative-caret-position="824">
+          <caret line="134" column="40" lean-forward="true" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
           <folding />
         </state>
       </provider>
