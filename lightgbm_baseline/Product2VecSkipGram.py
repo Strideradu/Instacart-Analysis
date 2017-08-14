@@ -68,7 +68,7 @@ class Product2VecSkipGram:
                     print('CV',cv_loss / cv_steps)
 
     def save_model(self, step):
-        self.saver.save(self.sess, '/mnt/home/dunan/Learn/Kaggle/instacart/models/prod2vec_skip_gram', global_step=step)
+        self.saver.save(self.sess, '/mnt/home/dunan/Learn/Kaggle/instacart/models/prod2vec_skip_gram_2nd', global_step=step)
 
     def load_model(self, path):
         self.saver.restore(self.sess, path)
