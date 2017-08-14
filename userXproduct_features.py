@@ -76,6 +76,7 @@ userXproduct['UP_median_hour_of_day'] = user_product_group['order_hour_of_day'].
 
 order_size  = pd.DataFrame()
 order_size['order_size'] = priors.groupby('order_id').size()
+order_size['order_id'] = order_size.index
 priors = priors.merge(order_size, on="order_id", how="left")
 userXproduct['average_order_size'] = priors.groupby('user_product_id')['order_size'].mean().astype(np.float32)
 userXproduct['UP_revert_add_to_cart'] = userXproduct.average_order_size - userXproduct.UP_mean_add_to_cart
