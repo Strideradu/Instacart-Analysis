@@ -24,6 +24,11 @@ def build_features(data, features, feature_dir="/mnt/home/dunan/Learn/Kaggle/ins
 
         data = data.merge(pd.read_csv(path), on=merge_on, how="left")
 
+    product_embeddings = pd.read_pickle('/mnt/home/dunan/Learn/Kaggle/instacart/data/product_embeddings.pkl')
+    embedings = list(range(32))
+    product_embeddings = product_embeddings[embedings + ['product_id']]
+    data = data.merge(product_embeddings, on=['product_id'], how="left")
+
     try:
         labels = data['labels'].values
         return data.drop(['labels'], axis=1), labels
